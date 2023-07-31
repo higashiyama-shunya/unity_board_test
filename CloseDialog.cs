@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CloseDialog : MonoBehaviour
 {
+    //ゲームオブジェクトが開いているか判定する変数。開いていたらtrueになる。
     public bool isOpen => gameObject.activeSelf;
 
     public void Close()

@@ -10,20 +10,20 @@ using UnityEngine.UI;
 
 public class ScrollItem : MonoBehaviour, IDynamicScrollViewItem
 {
+    //サンプルからあった背景の色を変えるためのリスト
     private readonly Color[] colors = new Color[] {
             Color.cyan,
             Color.green,
         };
 
+    //inspecterから貼り付けるための変数
     [SerializeField]
     public Text title;
     [SerializeField]
     public Image background;
 
+    //それぞれのアイテムのインデックス番号を保持する変数。
     private int itemIndex = -1;
-
-    [SerializeField]
-    DynamicVScrollView dynamicVScrollView;
 
     /*
     public void OnClick()
@@ -46,17 +46,20 @@ public class ScrollItem : MonoBehaviour, IDynamicScrollViewItem
 
     public void onClick()
     {
-        //初期値を
+        //アイテムにインデックス番号が無ければreturnで何もせずに戻る。
         if (this.itemIndex == -1) return;
+        //itemIndexでリストの中のどの要素を取得するか決める。
         onClick(this.itemIndex);
     }
 
-
+    //クリックした際のメソッド
     public void onClick(int index)
     {
+        //GetComponentで渡す用の変数
         Text text;
         ScrollView scrollView;
 
+        //必要なゲームオブジェクトを親や子オブジェクトから名前で探している。
         GameObject obj = transform.root.Find("Dialog").gameObject;
         GameObject textObj = obj.transform.Find("Text").gameObject;
         text = textObj.GetComponent<Text>();
@@ -64,6 +67,7 @@ public class ScrollItem : MonoBehaviour, IDynamicScrollViewItem
         GameObject chatRoomList = transform.parent.parent.gameObject;
         scrollView = chatRoomList.GetComponent<ScrollView>();
 
+        //ゲームオブジェクトから持ってきた値をdataに代入。
         List<ChatListResult> chatListResultList = scrollView.list;
         var data = chatListResultList[index];
 
@@ -72,13 +76,16 @@ public class ScrollItem : MonoBehaviour, IDynamicScrollViewItem
         Debug.Log(index + "番が押されました");
     }
 
+    //スクロールされるたびに実行されるメソッド。
     public void onUpdateItem(int index)
     {
         Debug.Log("onUpdateItem�J�n:" + index);
+        //ゲームオブジェクトの値を入れるための変数。
         ScrollView scrollView;
         GameObject obj = transform.parent.parent.gameObject;
         scrollView = obj.GetComponent<ScrollView>();
         List<ChatListResult> chatListResultList = scrollView.list;
+        //持ってきたリストの要素数が指定したインデックス番号より大きければ
         if (chatListResultList.Count > index)
         {
             //最終選択番号を更新する。
@@ -87,7 +94,7 @@ public class ScrollItem : MonoBehaviour, IDynamicScrollViewItem
             var data = chatListResultList[index];
 
             background.color = colors[Mathf.Abs(index) % colors.Length];
-
+            //テキストにidとルーム名を代入する。
             title.text = string.Format("{0}:{1}", data.id, data.chat_room_name);
         }
         Debug.Log("onUpdateItem�I��:" + index);
