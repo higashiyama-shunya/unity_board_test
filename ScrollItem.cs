@@ -14,38 +14,24 @@ public class ScrollItem : MonoBehaviour, IDynamicScrollViewItem
             Color.green,
         };
 
-    /*
-    public static List<ChatListResult> list;
-
-    [SerializeField]
-    public DynamicScrollView scrollView;
-    */
     [SerializeField]
     public Text title;
     [SerializeField]
     public Image background;
 
-
-    /*
-    private void Start()
+    public void OnClick()
     {
-        for (int i = 1; i < 4; i++)
-        {
-            list.Add(new ChatListResult { id = i, chat_room_name = "room" + i, owner_id = i });
-            //Debug.Log(list[i - 1].chat_room_name);
-        }
-        
-        //Debug.Log("listcount:" + list.Count + "\ntotalItemCount" + scrollView.totalItemCount);
-        scrollView.totalItemCount = list.Count;
-        Debug.Log("listcount:" + list.Count + "\ntotalItemCount" + scrollView.totalItemCount);
+        Dialog dialog;
+        GameObject obj = transform.root.Find("Dialog").gameObject;
+        obj.SetActive(true);
     }
-    */
 
     public void onUpdateItem(int index)
     {
-        Debug.Log("onUpdateItemäJén:" + index);
+
+        Debug.Log("onUpdateItemÔøΩJÔøΩn:" + index);
         ScrollView scrollView;
-        GameObject obj = transform.parent.parent.parent.gameObject;
+        GameObject obj = transform.parent.parent.gameObject;
         scrollView = obj.GetComponent<ScrollView>();
         List<ChatListResult> chatListResultList = scrollView.list;
         if (chatListResultList.Count > index)
@@ -56,7 +42,8 @@ public class ScrollItem : MonoBehaviour, IDynamicScrollViewItem
 
             title.text = string.Format("{0}:{1}", data.id, data.chat_room_name);
         }
-        Debug.Log("onUpdateItemèIóπ:" + index);
+        Debug.Log("onUpdateItemÔøΩIÔøΩÔøΩ:" + index);
+
     }
 
 }

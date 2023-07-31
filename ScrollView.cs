@@ -13,12 +13,13 @@ public class ScrollView : MonoBehaviour
     void Start()
     {
         DynamicScrollView dynamicScrollView;
-        dynamicScrollView = gameObject.GetComponent<DynamicScrollView>();
-        for (int i = 1; i < 10; i++)
+        GameObject obj = transform.parent.gameObject;
+        dynamicScrollView = obj.GetComponent<DynamicScrollView>();
+
+        for (int i = 1; i < 23; i++)
         {
             list.Add(new ChatListResult() { id = i, chat_room_name = "room" + i, owner_id = i });
         }
-        //Debug.Log("listcount:" + list.Count + "\ntotalItemCount" + scrollView.totalItemCount);
         dynamicScrollView.totalItemCount = list.Count;
         Debug.Log("listcount:" + list.Count + "\ntotalItemCount" + dynamicScrollView.totalItemCount);
     }
